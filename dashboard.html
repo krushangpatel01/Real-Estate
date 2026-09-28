@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanNest — Role Dashboard Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .dashboard-container {
+      max-width: 1300px;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+    .dash-header {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      box-shadow: var(--card-shadow);
+      backdrop-filter: blur(16px);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .user-welcome-block {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .user-avatar-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 15px var(--gold-glow);
+    }
+    .role-badge-pill {
+      display: inline-block;
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-primary);
+      margin-top: 0.25rem;
+    }
+    .role-switcher-chips {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(10, 14, 22, 0.7);
+      padding: 0.35rem;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .role-chip {
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .role-chip.active {
+      background: var(--gold-gradient);
+      color: var(--text-dark);
+    }
+    .role-chip:hover:not(.active) {
+      color: var(--text-main);
+    }
+    .btn-logout {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-logout:hover {
+      background: rgba(239, 68, 68, 0.25);
+      color: #ffffff;
+    }
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .dash-card {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      backdrop-filter: blur(16px);
+      transition: var(--transition);
+    }
+    .dash-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+    .dash-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .dash-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .dash-card-desc {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .action-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--gold-primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-bg-wrapper"></div>
+  <div class="auth-bg-overlay"></div>
+  <div class="glow-orb glow-orb-1"></div>
+
+  <!-- Navbar -->
+  <header class="auth-navbar">
+    <a href="index.html" class="nav-brand">
+      <div class="brand-icon-box">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L2 9.5V21C2 21.5523 2.44772 22 3 22H21C21.5523 22 22 21.5523 22 21V9.5L12 2ZM12 4.69141L19.5 10.3164V20H15V14H9V20H4.5V10.3164L12 4.69141ZM11 16H13V20H11V16Z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="brand-name">Urban<span style="color: var(--gold-primary);">Nest</span></span>
+        <span class="brand-badge">Dashboard</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-link">Portal Home</a>
+      <a href="login.html" class="btn-logout">
+        <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+        </svg>
+        Sign Out
+      </a>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <!-- Top Welcome Card -->
+    <div class="dash-header">
+      <div class="user-welcome-block">
+        <div class="user-avatar-circle" id="userInitial">J</div>
+        <div>
+          <h2 style="font-family:var(--font-heading);font-size:1.6rem;" id="greetingText">Welcome back, CP1_020</h2>
+          <span class="role-badge-pill" id="roleBadge">BUYER PORTAL</span>
+        </div>
+      </div>
+
+      <div class="role-switcher-chips">
+        <a href="?role=buyer" class="role-chip" id="chipBuyer">Buyer View</a>
+        <a href="?role=seller" class="role-chip" id="chipSeller">Seller View</a>
+        <a href="?role=admin" class="role-chip" id="chipAdmin">Admin View</a>
+      </div>
+    </div>
+
+    <!-- Role Content Views -->
+    <!-- 1. BUYER DASHBOARD -->
+    <div id="viewBuyer" class="role-view">
+      <h3 style="font-family:var(--font-heading);margin-bottom:1rem;color:var(--gold-light);">Buyer & Investor Modules (PDF Requirements)</h3>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Search & Advanced Filtering</h4>
+          <p class="dash-card-desc">Filter properties across Gujarat by price, area, bedroom count, amenities, and verified RERA badges.</p>
+          <a href="#" class="action-badge">Launch Filter Engine →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Machine Learning Price Prediction</h4>
+          <p class="dash-card-desc">Predict accurate fair market property prices using Scikit-learn/TensorFlow ML models trained on real transaction data.</p>
+          <a href="index.html#prediction" class="action-badge">Run AI Valuation →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Side-by-Side Property Comparison</h4>
+          <p class="dash-card-desc">Compare up to 4 luxury properties simultaneously on square footage, pricing per sqft, and neighborhood indices.</p>
+          <a href="#" class="action-badge">Compare Listings →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Map-Based Search & Distance</h4>
+          <p class="dash-card-desc">Select an area on the interactive map with dynamic distance calculation between the listing and your live location.</p>
+          <a href="#" class="action-badge">Open Map Explorer →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">AI Real Estate Chatbot</h4>
+          <p class="dash-card-desc">Smart conversational assistant to query nearby properties, market trends, and financing advice 24/7.</p>
+          <a href="#" class="action-badge">Chat with Assistant →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Report Suspicious / Fake Listings</h4>
+          <p class="dash-card-desc">Flag fraudulent listings. Properties reported 3+ times are automatically taken down for administrative review.</p>
+          <a href="#" class="action-badge">Report Center →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SELLER DASHBOARD -->
+    <div id="viewSeller" class="role-view" style="display:none;">
+      <h3 style="font-family:var(--font-heading);margin-bottom:1rem;color:var(--gold-light);">Seller & Developer Management Console</h3>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Add New Property Listing</h4>
+          <p class="dash-card-desc">Specify property type, square footage, amenities, expected pricing, and exact geographic coordinates.</p>
+          <a href="#" class="action-badge">Create Listing →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Media Upload (Images & 4K Video)</h4>
+          <p class="dash-card-desc">Upload high-resolution property photography, drone footage, and 3D walkthrough videos before publishing.</p>
+          <a href="#" class="action-badge">Upload Media →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Mark as Sold (Auto-Removal)</h4>
+          <p class="dash-card-desc">Mark completed transactions. Per PDF requirements, sold properties are automatically archived from buyer views.</p>
+          <a href="#" class="action-badge">Manage Inventory →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Buyer Inquiries & Leads</h4>
+          <p class="dash-card-desc">Direct interest requests submitted by verified buyers with contact validation and negotiation scheduling.</p>
+          <a href="#" class="action-badge">View 8 New Leads →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. ADMIN DASHBOARD -->
+    <div id="viewAdmin" class="role-view" style="display:none;">
+      <h3 style="font-family:var(--font-heading);margin-bottom:1rem;color:var(--gold-light);">Central System Administration & Governance</h3>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Listing Verification Queue</h4>
+          <p class="dash-card-desc">Review newly submitted seller listings, verify RERA compliance and deed records prior to public listing.</p>
+          <a href="#" class="action-badge">Review 12 Pending →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+          </div>
+          <h4 class="dash-card-title">Fake Listing Takedown (Threshold >= 3)</h4>
+          <p class="dash-card-desc">Automatic quarantine trigger when user reports reach 3. Instant blacklist of fraudulent sellers.</p>
+          <a href="#" class="action-badge">Inspect Flagged (2) →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">User & Role Management</h4>
+          <p class="dash-card-desc">Manage buyer privileges, seller agency credentials, and administrative security tokens.</p>
+          <a href="#" class="action-badge">Manage Accounts →</a>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-icon">
+            <svg style="width:24px;height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <h4 class="dash-card-title">System Metrics & ML Monitoring</h4>
+          <p class="dash-card-desc">Model accuracy (currently 94.8%), server latency, API usage, and MySQL database replication stats.</p>
+          <a href="#" class="action-badge">View Health Telemetry →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Extract query params
+    const params = new URLSearchParams(window.location.search);
+    const role = (params.get('role') || 'buyer').toLowerCase();
+    const user = params.get('user') || 'CP1_020';
+
+    document.getElementById('greetingText').innerText = `Welcome back, ${decodeURIComponent(user)}`;
+    document.getElementById('userInitial').innerText = decodeURIComponent(user).charAt(0).toUpperCase();
+
+    // Select role
+    ['buyer', 'seller', 'admin'].forEach(r => {
+      const chip = document.getElementById(`chip${r.charAt(0).toUpperCase() + r.slice(1)}`);
+      const view = document.getElementById(`view${r.charAt(0).toUpperCase() + r.slice(1)}`);
+      if (r === role) {
+        chip.classList.add('active');
+        view.style.display = 'block';
+        document.getElementById('roleBadge').innerText = `${r.toUpperCase()} PORTAL CONSOLE`;
+      } else {
+        chip.classList.remove('active');
+        view.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

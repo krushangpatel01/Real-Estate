@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanNest — Secure Login Portal (Buyer, Seller, Admin)</title>
+  <meta name="description" content="Access your UrbanNest account. Select your portal: Buyer, Seller, or Admin to continue.">
+
+  <!-- Google Fonts for High-End Luxury Aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-login">
+
+  <!-- Fixed Luxury Villa Background Image & Dark Overlay -->
+  <div class="auth-bg-wrapper"></div>
+  <div class="auth-bg-overlay"></div>
+
+  <!-- Ambient Golden Glow Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Top Navigation Bar -->
+  <header class="auth-navbar">
+    <a href="index.html" class="nav-brand">
+      <div class="brand-icon-box">
+        <!-- Luxury Villa Architectural Crown SVG -->
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L2 9.5V21C2 21.5523 2.44772 22 3 22H21C21.5523 22 22 21.5523 22 21V9.5L12 2ZM12 4.69141L19.5 10.3164V20H15V14H9V20H4.5V10.3164L12 4.69141ZM11 16H13V20H11V16Z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="brand-name">Urban<span style="color: var(--gold-primary);">Nest</span></span>
+        <span class="brand-badge">Smart Real Estate</span>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <div class="nav-security-tag">
+        <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+        </svg>
+        <span>256-Bit SSL Encrypted</span>
+      </div>
+      <a href="register.html" class="nav-link">
+        <span>Need an account?</span>
+        <strong style="color:var(--gold-primary);">Register</strong>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Login Card Container -->
+  <main class="auth-page-container">
+    <div class="auth-card">
+
+      <!-- Header Section -->
+      <div class="auth-header">
+        <h1 class="auth-title" id="authCardTitle">Welcome Back, Esteemed Buyer</h1>
+        <p class="auth-subtitle" id="authCardSubtitle">
+          Access AI valuations, compare luxury properties, and connect with verified sellers.
+        </p>
+      </div>
+
+      <!-- 3-Role Selection Switcher (Buyer, Seller, Admin) -->
+      <div class="role-selector-wrap">
+        <label class="role-selector-label">Select Your Account Type</label>
+        <div class="role-tabs">
+          <!-- Role 1: Buyer -->
+          <button type="button" class="role-tab-btn active" data-role="buyer" id="tabBuyer">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+            <span>Buyer</span>
+          </button>
+
+          <!-- Role 2: Seller -->
+          <button type="button" class="role-tab-btn" data-role="seller" id="tabSeller">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+            <span>Seller</span>
+          </button>
+
+          <!-- Role 3: Admin -->
+          <button type="button" class="role-tab-btn" data-role="admin" id="tabAdmin">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+            <span>Admin</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Context Information Banner -->
+      <div class="role-info-banner" id="roleInfoBanner">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span><strong>Buyer Portal:</strong> Access verified luxury listings, instant ML price predictions, and direct seller contact.</span>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form" autocomplete="on">
+        
+        <!-- Email / Username Input -->
+        <div class="form-group">
+          <label class="form-label" for="authEmail">Email or Registered ID</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path>
+            </svg>
+            <input 
+              type="email" 
+              id="authEmail" 
+              class="form-input" 
+              placeholder="investor@example.com" 
+              required
+              autocomplete="email"
+            >
+          </div>
+        </div>
+
+        <!-- Role-Specific Field: Admin Security Token -->
+        <div class="form-group role-field hidden-field" data-for-role="admin">
+          <label class="form-label" for="adminTokenInput">
+            <span>Admin Security Clearance Token</span>
+            <small style="color:var(--gold-primary);font-size:0.75rem;">(Demo: URBAN-ADMIN-990)</small>
+          </label>
+          <div class="input-wrapper">
+            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+            </svg>
+            <input 
+              type="text" 
+              id="adminTokenInput" 
+              class="form-input" 
+              placeholder="Enter security access key or OTP"
+            >
+          </div>
+        </div>
+
+        <!-- Password Input with Show/Hide -->
+        <div class="form-group">
+          <label class="form-label" for="authPassword">Password</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            <input 
+              type="password" 
+              id="authPassword" 
+              class="form-input" 
+              placeholder="••••••••••••" 
+              required
+              autocomplete="current-password"
+            >
+            <button type="button" class="password-toggle-btn" data-target="authPassword" aria-label="Toggle password visibility">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Options: Remember Me & Forgot Password -->
+        <div class="form-options-row">
+          <label class="custom-checkbox-label">
+            <input type="checkbox" id="rememberMe">
+            <span>Remember session</span>
+          </label>
+          <a href="#" class="forgot-link" id="forgotPasswordBtn">Forgot password?</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn-primary-gold" id="submitAuthBtn">
+          <svg style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+          </svg>
+          <span id="submitBtnText">Sign In to Buyer Portal</span>
+        </button>
+
+      </form>
+
+      <!-- Quick 1-Click Evaluation Credentials Filler -->
+      <div class="auth-divider">
+        <span>Instant Evaluation Sign-In</span>
+      </div>
+      <div class="demo-quick-auth">
+        <button type="button" class="demo-chip-btn" data-demo-role="buyer">
+          <span style="color:var(--gold-primary);">★</span> Demo Buyer
+        </button>
+        <button type="button" class="demo-chip-btn" data-demo-role="seller">
+          <span style="color:var(--gold-primary);">★</span> Demo Seller
+        </button>
+        <button type="button" class="demo-chip-btn" data-demo-role="admin">
+          <span style="color:var(--gold-primary);">★</span> Demo Admin
+        </button>
+      </div>
+
+      <!-- Switch to Register Link -->
+      <div class="auth-switch-footer">
+        <span>Don't have a registered account?</span>
+        <a href="register.html">Create an Account</a>
+      </div>
+
+      <!-- Trust & Security Strip -->
+      <div class="trust-strip">
+        <div class="trust-item">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>100% Verified Listings</span>
+        </div>
+        <div class="trust-item">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"/>
+          </svg>
+          <span>2,500+ Active Clients</span>
+        </div>
+        <div class="trust-item">
+          <svg fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <span>AI Price Audited</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Forgot Password Modal -->
+  <div class="modal-overlay" id="forgotPasswordModal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">
+        <svg style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="width:52px;height:52px;margin:0 auto 1rem;background:var(--gold-subtle);border:1px solid var(--gold-border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-primary);">
+          <svg style="width:26px;height:26px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+        </div>
+        <h3 style="font-family:var(--font-heading);font-size:1.35rem;margin-bottom:0.4rem;">Reset Your Password</h3>
+        <p style="font-size:0.86rem;color:var(--text-secondary);">Enter your verified email or mobile number to receive a secure recovery code.</p>
+      </div>
+
+      <form id="forgotForm">
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="resetEmailInput">Registered Email</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path>
+            </svg>
+            <input type="email" id="resetEmailInput" class="form-input" placeholder="name@domain.com" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary-gold">
+          Send Recovery Link
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Root -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Page Footer -->
+  <footer class="auth-page-footer">
+    <p>© 2026 UrbanNest — Smart Real Estate Platform. Project by Team CP1_020 (Ganpat University).</p>
+    <p style="margin-top:0.35rem;font-size:0.75rem;">
+      <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a> • <a href="#">RERA Disclosures</a> • <a href="#">Support Hotline</a>
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="auth.js"></script>
+</body>
+</html>

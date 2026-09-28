@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanNest — Smart Real Estate Platform Powered by ML</title>
+  <meta name="description" content="Find your dream property with Artificial Intelligence. Buy, sell, compare, and predict property prices using machine learning.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Homepage Specific Opulent Layout */
+    .hero-section {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      gap: 3rem;
+      position: relative;
+      z-index: 5;
+    }
+    .hero-text {
+      flex: 1;
+      max-width: 620px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gold-subtle);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-primary);
+      padding: 0.35rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-title span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .hero-btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .hero-btn-primary {
+      background: var(--gold-gradient);
+      color: var(--text-dark);
+      padding: 0.95rem 1.8rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-family: var(--font-heading);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 25px var(--gold-glow);
+      transition: var(--transition);
+    }
+    .hero-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(229, 169, 60, 0.45);
+    }
+    .hero-btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--gold-border);
+      color: var(--text-main);
+      padding: 0.95rem 1.8rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .hero-btn-outline:hover {
+      background: var(--gold-subtle);
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+    }
+    .hero-image-frame {
+      flex: 1;
+      max-width: 580px;
+      position: relative;
+    }
+    .hero-image-frame img {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--gold-border);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(229, 169, 60, 0.2);
+    }
+    .hero-floating-stat {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: rgba(14, 18, 26, 0.95);
+      border: 1px solid var(--gold-border);
+      padding: 1rem 1.4rem;
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Role Quick Access Gateways */
+    .role-gateways-section {
+      max-width: 1400px;
+      margin: 2rem auto 5rem;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 5;
+    }
+    .section-header-center {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3rem;
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+    .gateway-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+    .gateway-card {
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 2rem;
+      backdrop-filter: blur(16px);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .gateway-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold-primary);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px var(--gold-glow);
+    }
+    .gateway-card-role {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold-primary);
+      margin-bottom: 0.75rem;
+    }
+    .gateway-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .gateway-card-desc {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      flex: 1;
+    }
+    .gateway-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .gateway-actions a {
+      flex: 1;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .btn-card-login {
+      background: var(--gold-gradient);
+      color: var(--text-dark);
+    }
+    .btn-card-register {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--gold-border);
+      color: var(--text-main);
+    }
+    .btn-card-register:hover {
+      background: var(--gold-subtle);
+      border-color: var(--gold-primary);
+      color: var(--gold-primary);
+    }
+
+    /* Featured Properties Grid (Matching Slide 18) */
+    .prop-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+    .prop-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      transition: var(--transition);
+    }
+    .prop-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-4px);
+    }
+    .prop-img-box {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .prop-price-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--gold-gradient);
+      color: var(--text-dark);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .prop-info {
+      padding: 1.5rem;
+    }
+    .prop-title {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .prop-location {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .prop-meta-row {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1rem;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+
+    /* Price Prediction Widget (Matching Slide 20) */
+    .prediction-section {
+      max-width: 1100px;
+      margin: 4rem auto;
+      background: var(--bg-card);
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      backdrop-filter: blur(20px);
+      box-shadow: var(--card-shadow);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2.5rem;
+      position: relative;
+      z-index: 5;
+    }
+    .pred-circle {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      border: 4px solid var(--gold-primary);
+      box-shadow: 0 0 35px var(--gold-glow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem auto;
+      text-align: center;
+    }
+    .pred-price-val {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 992px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 1rem;
+      }
+      .hero-btn-group {
+        justify-content: center;
+      }
+      .gateway-cards, .prop-card-grid, .prediction-section {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-bg-wrapper"></div>
+  <div class="auth-bg-overlay"></div>
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Main Navigation Bar -->
+  <header class="auth-navbar">
+    <a href="index.html" class="nav-brand">
+      <div class="brand-icon-box">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2L2 9.5V21C2 21.5523 2.44772 22 3 22H21C21.5523 22 22 21.5523 22 21V9.5L12 2ZM12 4.69141L19.5 10.3164V20H15V14H9V20H4.5V10.3164L12 4.69141ZM11 16H13V20H11V16Z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="brand-name">Urban<span style="color: var(--gold-primary);">Nest</span></span>
+        <span class="brand-badge">Enterprise Edition</span>
+      </div>
+    </a>
+
+    <div class="nav-actions">
+      <a href="#properties" class="nav-link">Properties</a>
+      <a href="#prediction" class="nav-link">AI Prediction</a>
+      <a href="login.html" class="nav-link" style="color:var(--text-main); font-weight:600;">Sign In</a>
+      <a href="register.html" class="hero-btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.88rem;">Get Started</a>
+    </div>
+  </header>
+
+  <!-- Hero Section (Slide 17) -->
+  <section class="hero-section">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <span>AI-Powered Next Generation Real Estate</span>
+      </div>
+      <h1 class="hero-title">
+        Find Your Dream Property With <span>Artificial Intelligence</span>
+      </h1>
+      <p class="hero-desc">
+        Buy, Sell, Compare and Predict Property Prices using Machine Learning. Certified listings, direct communication, and bank-grade authentication.
+      </p>
+      <div class="hero-btn-group">
+        <a href="#gateways" class="hero-btn-primary">
+          <span>Choose Account Portal</span>
+          <svg style="width:18px;height:18px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </a>
+        <a href="#prediction" class="hero-btn-outline">Predict Market Price</a>
+      </div>
+    </div>
+
+    <div class="hero-image-frame">
+      <img src="assets/images/luxury_bg.jpg" alt="UrbanNest Modern Luxury Villa">
+      <div class="hero-floating-stat">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-subtle);display:flex;align-items:center;justify-content:center;color:var(--gold-primary);">
+          <svg style="width:22px;height:22px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div>
+          <strong style="display:block;font-size:1.1rem;color:var(--gold-light);">94.8% ML Accuracy</strong>
+          <span style="font-size:0.8rem;color:var(--text-muted);">Trained on 25,000+ Regional Deeds</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Role Portals (Admin, Seller, Buyer) -->
+  <section class="role-gateways-section" id="gateways">
+    <div class="section-header-center">
+      <h2 class="section-title">Select Your Dedicated Access Portal</h2>
+      <p class="section-desc">Tailored interfaces, strict role authentication, and custom operational privileges for every stakeholder.</p>
+    </div>
+
+    <div class="gateway-cards">
+      <!-- 1. Buyer Portal -->
+      <div class="gateway-card">
+        <span class="gateway-card-role">For Investors & Home Seekers</span>
+        <h3 class="gateway-card-title">Buyer Portal</h3>
+        <p class="gateway-card-desc">
+          Explore certified luxury listings, run instant machine learning valuation models, compare properties side-by-side, and chat with AI assistants.
+        </p>
+        <div class="gateway-actions">
+          <a href="login.html?role=buyer" class="btn-card-login">Buyer Login</a>
+          <a href="register.html?role=buyer" class="btn-card-register">Sign Up</a>
+        </div>
+      </div>
+
+      <!-- 2. Seller Portal -->
+      <div class="gateway-card">
+        <span class="gateway-card-role">For Property Owners & Brokers</span>
+        <h3 class="gateway-card-title">Seller Console</h3>
+        <p class="gateway-card-desc">
+          List properties, upload 4K photography and walkthrough videos, receive direct buyer inquiries, and utilize auto-removal on sale completion.
+        </p>
+        <div class="gateway-actions">
+          <a href="login.html?role=seller" class="btn-card-login">Seller Login</a>
+          <a href="register.html?role=seller" class="btn-card-register">Register Agency</a>
+        </div>
+      </div>
+
+      <!-- 3. Admin Portal -->
+      <div class="gateway-card">
+        <span class="gateway-card-role">System Governance</span>
+        <h3 class="gateway-card-title">Admin Gateway</h3>
+        <p class="gateway-card-desc">
+          Restricted management console. Verify seller submissions, moderate reported fake listings (3-strike rule), monitor users, and supervise ML models.
+        </p>
+        <div class="gateway-actions">
+          <a href="login.html?role=admin" class="btn-card-login">Admin Login</a>
+          <a href="register.html?role=admin" class="btn-card-register">Request Token</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Properties Section (Slide 18) -->
+  <section class="role-gateways-section" id="properties">
+    <div class="section-header-center">
+      <h2 class="section-title">Featured Luxury Properties</h2>
+      <p class="section-desc">Explore hand-picked, RERA-verified luxury properties across prime locations in Gujarat.</p>
+    </div>
+
+    <div class="prop-card-grid">
+      <!-- Property 1 -->
+      <div class="prop-card">
+        <div class="prop-img-box" style="background-image: url('assets/images/luxury_bg.jpg');">
+          <span class="prop-price-tag">₹85 Lakh</span>
+        </div>
+        <div class="prop-info">
+          <h4 class="prop-title">Grand Architectural Villa</h4>
+          <p class="prop-location">
+            <svg style="width:16px;height:16px;color:var(--gold-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+            Ahmedabad, Gujarat
+          </p>
+          <div class="prop-meta-row">
+            <span>🛏 4 Beds</span>
+            <span>🚿 3 Baths</span>
+            <span>📐 2,400 sqft</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 2 -->
+      <div class="prop-card">
+        <div class="prop-img-box" style="background-image: url('assets/images/luxury_bg.jpg'); filter: hue-rotate(15deg);">
+          <span class="prop-price-tag">₹1.20 Crore</span>
+        </div>
+        <div class="prop-info">
+          <h4 class="prop-title">Modern Waterfront Penthouse</h4>
+          <p class="prop-location">
+            <svg style="width:16px;height:16px;color:var(--gold-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+            Surat, Gujarat
+          </p>
+          <div class="prop-meta-row">
+            <span>🛏 3 Beds</span>
+            <span>🚿 2 Baths</span>
+            <span>📐 1,800 sqft</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Property 3 -->
+      <div class="prop-card">
+        <div class="prop-img-box" style="background-image: url('assets/images/luxury_bg.jpg'); filter: brightness(0.85);">
+          <span class="prop-price-tag">₹65 Lakh</span>
+        </div>
+        <div class="prop-info">
+          <h4 class="prop-title">Executive Urban Residence</h4>
+          <p class="prop-location">
+            <svg style="width:16px;height:16px;color:var(--gold-primary);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+            Rajkot, Gujarat
+          </p>
+          <div class="prop-meta-row">
+            <span>🛏 3 Beds</span>
+            <span>🚿 2 Baths</span>
+            <span>📐 1,700 sqft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Machine Learning Price Prediction (Slide 20) -->
+  <section class="role-gateways-section" id="prediction">
+    <div class="section-header-center">
+      <h2 class="section-title">Live Machine Learning Price Estimator</h2>
+      <p class="section-desc">Analyze real estate trends using machine learning models trained on regional property transactions.</p>
+    </div>
+
+    <div class="prediction-section">
+      <div>
+        <h3 style="font-family:var(--font-heading);font-size:1.5rem;margin-bottom:1.25rem;">Property Parameters</h3>
+        <div class="auth-form">
+          <div class="form-group">
+            <label class="form-label">City Location</label>
+            <select class="form-select" id="predLocation">
+              <option value="Ahmedabad">Ahmedabad, Gujarat</option>
+              <option value="Surat">Surat, Gujarat</option>
+              <option value="Rajkot">Rajkot, Gujarat</option>
+              <option value="Vadodara">Vadodara, Gujarat</option>
+            </select>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Total Area (sqft)</label>
+              <input type="number" class="form-input" id="predSqft" value="1500" style="padding-left:1rem;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bedrooms</label>
+              <input type="number" class="form-input" id="predBeds" value="3" style="padding-left:1rem;">
+            </div>
+          </div>
+          <button type="button" class="btn-primary-gold" id="calculatePriceBtn" style="margin-top:1rem;">
+            ⚡ Run ML Price Prediction
+          </button>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+        <span style="font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Estimated Fair Market Price</span>
+        <div class="pred-circle">
+          <span class="pred-price-val" id="predDisplay">₹82L</span>
+          <span style="font-size:0.75rem;color:var(--gold-primary);">ML Confidence 94.8%</span>
+        </div>
+        <div style="display:flex;gap:1.5rem;margin-top:0.5rem;font-size:0.85rem;color:var(--text-secondary);">
+          <div>Trend: <strong style="color:var(--success);">Growing ↗</strong></div>
+          <div>Demand: <strong style="color:var(--gold-primary);">High</strong></div>
+          <div>Risk: <strong style="color:var(--info);">Low</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="auth-page-footer" style="padding: 3rem 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.08); background: rgba(8, 10, 14, 0.9);">
+    <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem;text-align:left;">
+      <div>
+        <h4 style="font-family:var(--font-heading);font-size:1.3rem;margin-bottom:0.5rem;">Urban<span style="color:var(--gold-primary);">Nest</span></h4>
+        <p style="color:var(--text-secondary);max-width:320px;font-size:0.88rem;">Smart Real Estate Platform powered by Machine Learning, map-based visualization, and trust-verified listings.</p>
+      </div>
+      <div>
+        <h5 style="color:var(--text-main);margin-bottom:0.75rem;">Access Portals</h5>
+        <ul style="list-style:none;font-size:0.88rem;display:flex;flex-direction:column;gap:0.4rem;">
+          <li><a href="login.html?role=buyer">Buyer & Investor Login</a></li>
+          <li><a href="login.html?role=seller">Seller & Agency Console</a></li>
+          <li><a href="login.html?role=admin">Executive Admin Gateway</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 style="color:var(--text-main);margin-bottom:0.75rem;">Project Presentation</h5>
+        <p style="color:var(--text-secondary);font-size:0.88rem;">Team ID: CP1_020 | Guide: KDM</p>
+        <p style="color:var(--text-secondary);font-size:0.88rem;">Ganpat University — Faculty of Engineering & Technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Live ML Price Calculation Simulator
+    document.getElementById('calculatePriceBtn')?.addEventListener('click', () => {
+      const sqft = parseFloat(document.getElementById('predSqft').value) || 1500;
+      const beds = parseFloat(document.getElementById('predBeds').value) || 3;
+      const loc = document.getElementById('predLocation').value;
+
+      let baseRate = 5000;
+      if (loc === 'Ahmedabad') baseRate = 5500;
+      else if (loc === 'Surat') baseRate = 6000;
+      else if (loc === 'Rajkot') baseRate = 4200;
+      else if (loc === 'Vadodara') baseRate = 4800;
+
+      const totalVal = (sqft * baseRate) + (beds * 350000);
+      const inLakhs = (totalVal / 100000).toFixed(1);
+
+      const displayEl = document.getElementById('predDisplay');
+      displayEl.innerText = inLakhs >= 100 ? `₹${(inLakhs/100).toFixed(2)}Cr` : `₹${inLakhs}L`;
+    });
+  </script>
+</body>
+</html>
